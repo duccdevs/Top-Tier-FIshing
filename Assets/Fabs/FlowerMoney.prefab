@@ -149,6 +149,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab4c0fc9d945304a83f1e7964d4f69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinImagesADD:
+  - {fileID: 3510549647655179366}
+  - {fileID: 3510549649286373168}
+  coinSprites:
+  - {fileID: 1098331103824381005, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: -5572046345281628673, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: -7320401006803770557, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: 6058736111241054633, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: 3467970512838562918, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: -3793373629892065156, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: 8680907775203649204, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: -1134010426719172281, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: -6079651030338234195, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
+  - {fileID: -4784115655290010483, guid: 27172ff5bfe91184681404c08ecb9013, type: 3}
 --- !u!61 &2611581044439052716
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -207,7 +221,7 @@ GameObject:
   - component: {fileID: 3510549648257511123}
   - component: {fileID: 3510549648257511120}
   m_Layer: 0
-  m_Name: 1 (2)
+  m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +337,7 @@ GameObject:
   - component: {fileID: 3510549648885559125}
   - component: {fileID: 3510549648885559122}
   m_Layer: 0
-  m_Name: 1 (3)
+  m_Name: Plus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,7 +419,7 @@ GameObject:
   - component: {fileID: 3510549649286373171}
   - component: {fileID: 3510549649286373168}
   m_Layer: 0
-  m_Name: 1 (1)
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -545,7 +559,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1978722841
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 3373568495408583166, guid: db0b57c59fa0d9d40ae223bf321afe63,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

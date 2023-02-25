@@ -103,7 +103,7 @@ public class BridgeManager : MonoBehaviour
                 }
                 if (ItemINT == 1)
                 {
-                    DisplayTextHolder.GetComponent<DisplayText>().SetText("MOGI", "this mogul friend will make you rich");
+                    DisplayTextHolder.GetComponent<DisplayText>().SetText("MOGI", "this mogul friend will make you rich \n teamwork makes more money");
                 }
                 if (ItemINT == 2)
                 {

@@ -9,4 +9,14 @@ public class MealManager : MonoBehaviour
     public int WhatFish1 = 0;
     public int WhatFish2 = 0;
     public int WhatFish3 = 0;
+
+    void Update()
+    {
+        if (transform.position.y <= -5.8F)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.rotation = Quaternion.identity;
+            transform.position = new Vector2(-4, 5);
+        }
+    }
 }

@@ -47,13 +47,11 @@ public class CoinManager : MonoBehaviour
     public void AddCash(int CashAmount, float mult)
     {
         currentCoins += CashAmount * mult;
-        GetComponent<Animator>().SetTrigger("Cash");
-        if (CashAmount < 10)
-        {
-            coinImagesADD[0].enabled = false;
-        }
+
         coinImagesADD[0].sprite = coinSprites[CashAmount / 10];
         coinImagesADD[1].sprite = coinSprites[CashAmount % 10];
+
+        GetComponent<Animator>().SetTrigger("Cash");
     }
 
     public void SetNewCount()

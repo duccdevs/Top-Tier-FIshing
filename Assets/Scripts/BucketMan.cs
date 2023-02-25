@@ -41,7 +41,7 @@ public class BucketMan : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Fish" && !Coots.GetComponent<Movement>().isSpecialFish)
+        if (collider.tag == "Fish" && !collider.gameObject.GetComponent<IAmFish>().SpecialFish)
         {
             int rr = Random.Range(0, 2);
             if (collider.GetComponent<IAmFish>().angle < 0 && collider.transform.position.y > transform.position.y + 0.125F && rr == 0)

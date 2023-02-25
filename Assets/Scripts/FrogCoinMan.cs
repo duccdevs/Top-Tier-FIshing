@@ -17,23 +17,26 @@ public class FrogCoinMan : MonoBehaviour
     int b;
     int c;
     int d;
+    int e;
 
     void Start()
     {
         GM = GameObject.Find("Coot");
         currentCoins = (3 * Mathf.Pow(1.3F, BoughtAmount)) - 1.25F;
-        string thingString = currentCoins.ToString("0000");
+        string thingString = currentCoins.ToString("00000");
 
         chars = thingString.ToCharArray();
         a = int.Parse(chars[0].ToString());
         b = int.Parse(chars[1].ToString());
         c = int.Parse(chars[2].ToString());
         d = int.Parse(chars[3].ToString());
+        e = int.Parse(chars[4].ToString());
 
         coinImages[0].sprite = coinSprites[a];
         coinImages[1].sprite = coinSprites[b];
         coinImages[2].sprite = coinSprites[c];
         coinImages[3].sprite = coinSprites[d];
+        coinImages[4].sprite = coinSprites[e];
     }
 
     public void SetNewCount()
@@ -45,19 +48,19 @@ public class FrogCoinMan : MonoBehaviour
         BoughtAmount++;
         currentCoins = (3 * Mathf.Pow(1.3F, BoughtAmount)) - 1.25F;
 
-        string thingString = currentCoins.ToString("0000");
+        string thingString = currentCoins.ToString("00000");
 
         chars = thingString.ToCharArray();
         a = int.Parse(chars[0].ToString());
         b = int.Parse(chars[1].ToString());
         c = int.Parse(chars[2].ToString());
         d = int.Parse(chars[3].ToString());
+        e = int.Parse(chars[4].ToString());
 
         coinImages[0].sprite = coinSprites[a];
         coinImages[1].sprite = coinSprites[b];
         coinImages[2].sprite = coinSprites[c];
         coinImages[3].sprite = coinSprites[d];
-
-        GetComponent<AudioSource>().Play();
+        coinImages[4].sprite = coinSprites[e];
     }
 }

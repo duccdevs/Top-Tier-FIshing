@@ -22,14 +22,24 @@ public class BubbleManager : MonoBehaviour
 
     void SetStartings()
     {
-        if (BubbleID == 1 || BubbleID == 2)
+        //0 = bridge || 1 = cosmetic || 2 = item
+        if (BubbleID == 0)
+        {
+            //ItemHolder.GetComponent<SpriteRenderer>().sprite = Sprites[0];
+        }
+        if (BubbleID == 1)
         {
             RandomItem = Random.Range(0, Sprites.Length);
             ItemHolder.GetComponent<SpriteRenderer>().sprite = Sprites[RandomItem];
         }
-        else
+        if (BubbleID == 2)
         {
-            //ItemHolder.GetComponent<SpriteRenderer>().sprite = Sprites[0];
+            RandomItem++;
+            if (RandomItem == 3)
+            {
+                RandomItem = 0;
+            }
+            ItemHolder.GetComponent<SpriteRenderer>().sprite = Sprites[RandomItem];
         }
         BubbleSprite.enabled = true;
         ItemHolder.SetActive(true);
@@ -49,14 +59,5 @@ public class BubbleManager : MonoBehaviour
     void ItemToo()
     {
         ItemHolder.SetActive(false);
-    //    ItemHolder.GetComponent<SpriteRenderer>().sprite = Sprites[RandomItem];
-        //if (BubbleID == 2)
-        //{
-        //    FrogHolder.GetComponent<BridgeManager>().ItemINT = RandomItem;
-        //}
-        //if (BubbleID == 1)
-        //{
-        //    FrogHolder.GetComponent<BridgeManager>().SkinINT = RandomItem;
-        //}
     }
 }
