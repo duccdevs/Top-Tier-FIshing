@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Water
+  - Fish
+  - tierhold
+  - Cooking
+  - Frog
+  - Bridge
+  - Bucket
+  - Skin
+  - Flower
+  - Meal
+  - Statue
+  - Hand
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PP
+  - ITEM
+  - BRIDGE
+  - ITEMB
+  - GROUND
+  - ITEMC
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 2148776121
+    locked: 0
+  - name: YardSet
+    uniqueID: 573412395
+    locked: 0
+  - name: BGFG
+    uniqueID: 2316244455
+    locked: 0
+  - name: Cat
+    uniqueID: 4270005197
+    locked: 0
+  - name: Item
+    uniqueID: 3366150723
+    locked: 0
+  - name: Ground
+    uniqueID: 2256870213
+    locked: 0
+  - name: Fish
+    uniqueID: 1101283801
+    locked: 0
+  - name: Water
+    uniqueID: 2660425551
+    locked: 0
+  - name: FG
+    uniqueID: 2896057691
+    locked: 0
