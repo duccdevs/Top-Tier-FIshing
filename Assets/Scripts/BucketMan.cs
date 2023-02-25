@@ -10,11 +10,14 @@ public class BucketMan : MonoBehaviour
 
     void Start()
     {
-        Coots = GameObject.Find("Coot");
         ropeLine = GetComponent<LineRenderer>();
     }
     void Update()
     {
+        if (Coots == null)
+        {
+            Coots = GameObject.Find("GameManager").GetComponent<GameManager>().CootsGameObject;
+        }
         if (transform.position.y <= -5.8F)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -38,7 +41,7 @@ public class BucketMan : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Fish")
+        if (collider.tag == "Fish" && !Coots.GetComponent<Movement>().isSpecialFish)
         {
             int rr = Random.Range(0, 2);
             if (collider.GetComponent<IAmFish>().angle < 0 && collider.transform.position.y > transform.position.y + 0.125F && rr == 0)

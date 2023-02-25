@@ -17,23 +17,31 @@ public class Spawner : MonoBehaviour
     private GameObject myThing;
     public float timerthing = 0;
     //
-    float spawnRate = 1.0F;
+    float spawnRate = Mathf.Infinity;
     float spawnTimer = 0.0F;
     //
     float fullsize = 1.125F;
     float MaxShit;
 
+    bool Started = false;
+
     void Start()
     {
         GM = GameObject.Find("GameManager");
-        spawnRate = Random.Range(NewFish.x, NewFish.y);
         myThing = transform.GetChild(1).gameObject;
         timerthing = 0;
     }
 
+    public void StartSpawning()
+    {
+        spawnRate = Random.Range(NewFish.x, NewFish.y) - 1;
+        timerthing = 0;
+        Started = true;
+    }
+
     void Update()
     {
-        if (GM.GetComponent<GameManager>().CootsGameObject != null)
+        if (GM.GetComponent<GameManager>().CootsGameObject != null && Started)
         {
             spawnTimer += Time.deltaTime;
             if (spawnTimer >= spawnRate)

@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
-        Screen.SetResolution(1280, 720, false);
+        //Application.targetFrameRate = 60;
+        //Screen.SetResolution(1280, 720, false);
     }
 
     public void CamShake(float shakeTime)

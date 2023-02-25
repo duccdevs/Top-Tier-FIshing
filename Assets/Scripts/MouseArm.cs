@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MouseArm : Photon.MonoBehaviour
 {
-    private float minX, maxX, minY, maxY;
-
     public float rotationSpeed = 5f;
     public float maxRotationAngle;
     public float minRotationAngle;
@@ -18,14 +16,6 @@ public class MouseArm : Photon.MonoBehaviour
 
     void Start()
     {
-        // Calculate the boundaries of the game view in world space
-        Vector3 min = Camera.main.ViewportToWorldPoint(Vector3.zero);
-        Vector3 max = Camera.main.ViewportToWorldPoint(Vector3.one);
-        minX = min.x;
-        maxX = max.x;
-        minY = min.y;
-        maxY = max.y;
-
         GM = GameObject.Find("GameManager");
 
         if (photonView.isMine)
@@ -80,6 +70,11 @@ public class MouseArm : Photon.MonoBehaviour
                 }
                 transform.parent.GetComponent<Movement>().realMeal = true;
             }
+            if (collider.tag == "Beef")
+            {
+                transform.parent.GetComponent<Movement>().foshHolder = collider.gameObject;
+                transform.parent.GetComponent<Movement>().realBeef = true;
+            }
         }
     }
 
@@ -124,6 +119,14 @@ public class MouseArm : Photon.MonoBehaviour
             if (collider.tag == "Meal" && transform.parent.GetComponent<Movement>().foshHolder.gameObject.tag == "Meal")
             {
                 transform.parent.GetComponent<Movement>().realMeal = false;
+                transform.parent.GetComponent<Movement>().HOLDINGMEAL = false;
+                transform.parent.GetComponent<Movement>().foshHolder = null;
+                transform.parent.GetComponent<Movement>().InsideFish = false;
+            }
+            else
+            if (collider.tag == "Beef" && transform.parent.GetComponent<Movement>().foshHolder.gameObject.tag == "Beef")
+            {
+                transform.parent.GetComponent<Movement>().realBeef = false;
                 transform.parent.GetComponent<Movement>().foshHolder = null;
                 transform.parent.GetComponent<Movement>().InsideFish = false;
             }

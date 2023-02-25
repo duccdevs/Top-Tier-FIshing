@@ -50,6 +50,7 @@ public class Movement : Photon.MonoBehaviour
     public bool InsideFish = false;
     public bool canCook = false;
     public bool frogged = false;
+    public bool isSpecialFish = false;
 
     [Header("FinalStats")]
     public float FoodQuality = 0;
@@ -73,9 +74,10 @@ public class Movement : Photon.MonoBehaviour
     public bool realSkin = false;
     public bool realFlower = false;
     public bool realMeal = false;
+    public bool realBeef = false;
     public bool HOLDINGMEAL = false;
     public float EatTime = 1.2F;
-    bool eaten = false;
+    public bool eaten = false;
     public bool CanFish = true;
     public bool CanFish2 = true;
 
@@ -112,9 +114,10 @@ public class Movement : Photon.MonoBehaviour
     void CaughtFish()
     {
         //Logic
-        if (CanFish && foshHolder != null)
+        if (CanFish && foshHolder != null && !realSkin && !realBridge && !realBucket && !realFlower && !realMeal && !realBeef)
         {
             CanFish = false;
+            isSpecialFish = foshHolder.GetComponent<IAmFish>().SpecialFish;
             FishyHoldy.GetComponent<SpriteRenderer>().color = Color.white;
             Hand.transform.GetChild(0).GetComponent<WhatFosh>().SetFish(fishiddd);
             GameObject textInstance = Instantiate(FishText, new Vector2(Mathf.Clamp(transform.position.x + 0.75F, -4, 3), transform.position.y + 0.25F), Quaternion.identity);
@@ -282,7 +285,7 @@ public class Movement : Photon.MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.tag == "Cooking" && !holdingItem)
+        if(collider.tag == "Cooking" && !holdingItem && !isSpecialFish)
         {
             canCook = true;
             CookStation = collider.gameObject;
@@ -378,7 +381,6 @@ public class Movement : Photon.MonoBehaviour
             {
                 //Grab Bridge
                 HoldItem(8);
-                print("bridge");
                 BdigeMan.GetComponent<BridgeManager>().thisCol.enabled = true;
                 return;
             }
@@ -387,7 +389,6 @@ public class Movement : Photon.MonoBehaviour
             {
                 //Grab Bucket
                 HoldItem(9);
-                print("bucket");
                 BdigeMan.GetComponent<BridgeManager>().thisCol.enabled = true;
                 return;
             }
@@ -404,7 +405,6 @@ public class Movement : Photon.MonoBehaviour
             {
                 //GrabFlower
                 HoldItem(10);
-                print("bucket");
                 BdigeMan.GetComponent<BridgeManager>().thisCol.enabled = true;
                 return;
             }
@@ -414,7 +414,14 @@ public class Movement : Photon.MonoBehaviour
                 //GrabMeal
                 HoldItem(11);
                 HOLDINGMEAL = true;
-                print("meal");
+                BdigeMan.GetComponent<BridgeManager>().thisCol.enabled = true;
+                return;
+            }
+            else
+            if (realBeef)
+            {
+                //GrabBeef
+                HoldItem(12);
                 BdigeMan.GetComponent<BridgeManager>().thisCol.enabled = true;
                 return;
             }
@@ -426,7 +433,7 @@ public class Movement : Photon.MonoBehaviour
             Destroy(grabInst, 0.85F);
             fishDelay += 0.2F;
 
-            if (InsideFish && !realBridge && !realBucket && !realSkin && !realFlower && !realMeal)
+            if (InsideFish && !realBridge && !realBucket && !realSkin && !realFlower && !realMeal && !realBeef)
             {
                 //Caught Fish
                 CaughtFish();
@@ -479,8 +486,20 @@ public class Movement : Photon.MonoBehaviour
                     //DONE EATING
                     eaten = true;
                     Hand.transform.GetChild(0).GetComponent<WhatFosh>().SetFishSkel(fishiddd);
-                    Spawners[fishiddd].GetComponent<Spawner>().Buff(issShiny);
-                    print("ATE TOO MUCH WTF");
+                    if (!isSpecialFish)
+                    {
+                        Spawners[fishiddd].GetComponent<Spawner>().Buff(issShiny);
+                    }
+                    else
+                    {
+                        print("LionFish Buff");
+                        foreach (GameObject go in Spawners)
+                        {
+                            go.GetComponent<Spawner>().Buff(true);
+                        }
+
+                        isSpecialFish = false;
+                    }
                     HoldtoEat = false;
                     GM.GetComponent<GameManager>().CanMove = true;
                     GM.GetComponent<GameManager>().CanMoveMouse = true;
@@ -530,6 +549,7 @@ public class Movement : Photon.MonoBehaviour
                     foshinst = Instantiate(AllFish[HoldingId], Hand.transform.GetChild(0).transform.position, Quaternion.identity);
                     if (HoldingId == 11)
                     {
+                        //Meal
                         foshinst.GetComponent<MealManager>().FoodQuality = FoodQuality;
                         foshinst.GetComponent<MealManager>().WhatFish1 = WhatFish1;
                         foshinst.GetComponent<MealManager>().WhatFish2 = WhatFish2;
@@ -553,7 +573,7 @@ public class Movement : Photon.MonoBehaviour
             }
             else
             {
-                if (!eaten)
+                if (!eaten && !isSpecialFish)
                 {
                     //what fish + if shiny
                     CookStation.GetComponent<CookManager>().AddFish(HoldingId, issShiny);
@@ -565,6 +585,7 @@ public class Movement : Photon.MonoBehaviour
             realFlower = false;
             realMeal = false;
             realSkin = false;
+            realBeef = false;
 
             CanFish = true;
 

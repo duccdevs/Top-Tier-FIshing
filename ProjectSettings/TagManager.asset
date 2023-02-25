@@ -16,6 +16,8 @@ TagManager:
   - Meal
   - Statue
   - Hand
+  - Spawner
+  - Beef
   layers:
   - Default
   - TransparentFX
@@ -65,11 +67,14 @@ TagManager:
   - name: Cat
     uniqueID: 4270005197
     locked: 0
+  - name: Ground
+    uniqueID: 2256870213
+    locked: 0
   - name: Item
     uniqueID: 3366150723
     locked: 0
-  - name: Ground
-    uniqueID: 2256870213
+  - name: GroundFG
+    uniqueID: 61004273
     locked: 0
   - name: Fish
     uniqueID: 1101283801

@@ -105,6 +105,10 @@ public class BridgeManager : MonoBehaviour
                 {
                     DisplayTextHolder.GetComponent<DisplayText>().SetText("MOGI", "this mogul friend will make you rich");
                 }
+                if (ItemINT == 2)
+                {
+                    DisplayTextHolder.GetComponent<DisplayText>().SetText("MEAT BAIT", "throw into water to catch even bigger fish (can't cook)");
+                }
                 PlayerPrefs.SetInt("Item" + ItemINT.ToString(), 1);
             }
         }

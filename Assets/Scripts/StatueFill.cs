@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StatueFill : MonoBehaviour
 {
@@ -119,6 +120,13 @@ public class StatueFill : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(Victory);
         GameObject.Find("GameManager").GetComponent<GameManager>().CamShake(0.5F);
         Coots.GetComponent<Movement>().enabled = false;
+
+        Invoke("GoBackHome", 5);
+    }
+
+    void GoBackHome()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void SetNewCount()

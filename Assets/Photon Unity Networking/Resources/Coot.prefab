@@ -15391,7 +15391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858bafd5c64fdbc4db025f51a6f4240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 82
+  speed: 84
   flipped: 0
   GhostBridge: {fileID: 8152395419508726368}
   FishyHoldy: {fileID: 6500822404994443475}
@@ -15433,6 +15433,8 @@ MonoBehaviour:
   - {fileID: 279296102085222294, guid: b43e39f8606ab0e4d8af0a2744f5ddcb, type: 3}
   - {fileID: 3510549648002134316, guid: 0fe858f78613c93489a8b3e4f3044374, type: 3}
   - {fileID: 2473645811875202129, guid: c0fb3759c660e984bb413607ce8f6ce8, type: 3}
+  - {fileID: 7906198482365607123, guid: 97f04df8e9844b042abb014996a028e1, type: 3}
+  - {fileID: 5911682058912409986, guid: 0bfece15b1387014793eaa87394be868, type: 3}
   AllFishSkeleton:
   - {fileID: 8021826005270514121, guid: 4e7a822ff0d6e3840a1dd7dcf24c8615, type: 3}
   - {fileID: 8132488727083979304, guid: 498c15c740cdf194fb2b3a81e40e7533, type: 3}
@@ -15442,10 +15444,17 @@ MonoBehaviour:
   - {fileID: 2285425849709859176, guid: b5fe83f9050e0f9458b6d4ca941f4628, type: 3}
   - {fileID: 5074038734911888596, guid: 79829fd557200ad4aa4d236e59f531bc, type: 3}
   - {fileID: 3275425222306365967, guid: 687ccccd136f3024d8efa4a16adc4306, type: 3}
+  - {fileID: 726168578012421694, guid: 740ed7f96e3e70d4796068a454bc37a9, type: 3}
+  - {fileID: 726168578012421694, guid: 740ed7f96e3e70d4796068a454bc37a9, type: 3}
+  - {fileID: 726168578012421694, guid: 740ed7f96e3e70d4796068a454bc37a9, type: 3}
+  - {fileID: 726168578012421694, guid: 740ed7f96e3e70d4796068a454bc37a9, type: 3}
+  - {fileID: 726168578012421694, guid: 740ed7f96e3e70d4796068a454bc37a9, type: 3}
+  - {fileID: 726168578012421694, guid: 740ed7f96e3e70d4796068a454bc37a9, type: 3}
   BridgeCount: 0
   InsideFish: 0
   canCook: 0
   frogged: 0
+  isSpecialFish: 0
   FoodQuality: 0
   WhatFish1: 0
   WhatFish2: 0
@@ -15468,6 +15477,7 @@ MonoBehaviour:
   realSkin: 0
   realFlower: 0
   realMeal: 0
+  realBeef: 0
   HOLDINGMEAL: 0
   EatTime: 2
   CanFish: 1
@@ -15814,6 +15824,8 @@ MonoBehaviour:
   - {fileID: 7578331518214074657, guid: ba9aaebcc59b39b478e63cc9d543170d, type: 3}
   - {fileID: -7964335699067202220, guid: 800989826fb60b24ab35adbfa666b11f, type: 3}
   - {fileID: -5766553441559514149, guid: bce0bc547da86df47bc0a5f8ed6dc097, type: 3}
+  - {fileID: -8122194743054270021, guid: f16574eed99f56b4ba585c0ca2a76f1d, type: 3}
+  - {fileID: 7457963369679664878, guid: f706bb75f2ebf724ea607c5da5300c9a, type: 3}
   AllFishSkel:
   - {fileID: -1557867150134186914, guid: 01093bc67fdb95c45ad1e94dc72a480f, type: 3}
   - {fileID: 7824848129548364887, guid: d8995bc528992e548a3d23c67d306fd9, type: 3}
@@ -15823,6 +15835,12 @@ MonoBehaviour:
   - {fileID: -4604264939432233574, guid: b0ba78cb7241b104c9f25d8c21f70fa4, type: 3}
   - {fileID: -7013077938672388731, guid: 01bf7dda262ca334195399f6285b129a, type: 3}
   - {fileID: 4658955546584045673, guid: 6e8e52cf47bb62546abfaa4a4ab70a2d, type: 3}
+  - {fileID: -1956124871771411484, guid: f85da2ed7c7a5d749b83bc001b9478f4, type: 3}
+  - {fileID: -1956124871771411484, guid: f85da2ed7c7a5d749b83bc001b9478f4, type: 3}
+  - {fileID: -1956124871771411484, guid: f85da2ed7c7a5d749b83bc001b9478f4, type: 3}
+  - {fileID: -1956124871771411484, guid: f85da2ed7c7a5d749b83bc001b9478f4, type: 3}
+  - {fileID: -1956124871771411484, guid: f85da2ed7c7a5d749b83bc001b9478f4, type: 3}
+  - {fileID: -1956124871771411484, guid: f85da2ed7c7a5d749b83bc001b9478f4, type: 3}
 --- !u!95 &6500822404994443487
 Animator:
   serializedVersion: 3

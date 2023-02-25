@@ -10,6 +10,7 @@ public class IAmFish : MonoBehaviour
     private GameObject Shinyd;
     public int fishID;
     public float angle;
+    public bool SpecialFish = false;
     bool rel = false;
     Vector2 origPos;
     public AudioClip gone;
@@ -45,7 +46,10 @@ public class IAmFish : MonoBehaviour
             {
                 GetComponent<BoxCollider2D>().enabled = true;
             }
-            SetRarity();
+            if (!SpecialFish)
+            {
+                SetRarity();
+            }
         }
     }
 
