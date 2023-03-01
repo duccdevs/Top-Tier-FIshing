@@ -90,7 +90,7 @@ TextureImporter:
       213: -7289635372283412018
     second: DASH
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -110,6 +110,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,8 +121,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -141,9 +143,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -183,6 +190,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -815,6 +834,36 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      0: 1098331103824381005
+      1: -3614086131806499543
+      2: -7320401006803770557
+      3: 6058736111241054633
+      4: 3467970512838562918
+      5: -3793373629892065156
+      6: 8680907775203649204
+      7: -1134010426719172281
+      8: -6079651030338234195
+      9: -4784115655290010483
+      A: -6847419352987760108
+      B: -9093530154041554227
+      BB: 8957799280767171676
+      C: -1560285446739881496
+      D: 575597360698721174
+      DASH: -7289635372283412018
+      DOTS: -575986866923060675
+      E: 786097963829918169
+      EE: -1375810337271463503
+      F: -3742783352210377173
+      FONT_0: 1718236365609260105
+      I: 2777952095650272633
+      IIIII: -5572046345281628673
+      L: 1886273020692175522
+      S: -4382259454325838319
+      X: 7002443007466058339
+      Z: -5377883285430075391
+      dot: 8071638345718862074
+      plus: -229709074608996604
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class Movement : Photon.MonoBehaviour
 {
@@ -275,7 +275,7 @@ public class Movement : Photon.MonoBehaviour
         }
         if (skinIDDD == 2)
         {
-            CosmeticHolder.GetComponent<CosmeticMan>().Skins[skinsId].GetComponent<Light2D>().enabled = true;
+            CosmeticHolder.GetComponent<CosmeticMan>().Skins[skinsId].GetComponent<UnityEngine.Rendering.Universal.Light2D>().enabled = true;
         }
         //ITEM TEXT
         audioSource.PlayOneShot(ItemOn);
@@ -489,6 +489,7 @@ public class Movement : Photon.MonoBehaviour
                     if (!isSpecialFish)
                     {
                         Spawners[fishiddd].GetComponent<Spawner>().Buff(issShiny);
+                        isSpecialFish = false;
                     }
                     else
                     {
@@ -520,8 +521,10 @@ public class Movement : Photon.MonoBehaviour
                     holdingFosh = false;
                     holdingItem = false;
                     HOLDINGMEAL = false;
+                    isSpecialFish = false;
                     eaten = false;
                     Hand.transform.GetChild(0).GetComponent<WhatFosh>().ReleaseFish();
+                    isSpecialFish = false;
                     EatTime = 1.2F;
                     Destroy(foshHolder);
                     return;

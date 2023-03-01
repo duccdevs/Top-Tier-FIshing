@@ -16,6 +16,7 @@ public class BridgeManager : MonoBehaviour
     public Animator animCoins;
     public AudioClip[] sounds;
     public BoxCollider2D thisCol;
+    public int BridgeAmount = 0;
 
     public bool CanBuy = true;
     float nobuytime = 2.0F;
@@ -28,6 +29,9 @@ public class BridgeManager : MonoBehaviour
     public GameObject MouthOpen;
     public GameObject Tongue;
     public GameObject Inhale;
+    public GameObject FireFlies;
+    public Vector2 FireFliesPos;
+    Vector2 velocity = Vector2.zero;
     public LineRenderer tongueLine;
 
     public GameObject BridgeBubble;
@@ -42,6 +46,7 @@ public class BridgeManager : MonoBehaviour
         anim = GetComponent<Animator>();
 
         MoneyThing.GetComponent<FrogCoinMan>().SetNewCount();
+        FireFliesPos = BridgeBubble.transform.position;
     }
 
     void Update()
@@ -56,6 +61,8 @@ public class BridgeManager : MonoBehaviour
             nobuytime = 0.0F;
             CanBuy = true;
         }
+
+        FireFlies.transform.position = Vector2.SmoothDamp(FireFlies.transform.position, FireFliesPos, ref velocity, 0.8F);
     }
 
     public void Bought()
@@ -74,11 +81,13 @@ public class BridgeManager : MonoBehaviour
     {
         if (rr == 0)
         {
-            if (GM.GetComponent<GameManager>().CootsGameObject.GetComponent<Movement>().BridgeCount <= 7)
+            if (BridgeAmount <= 7)
             {
                 //Bridge
                 Tongue.transform.position = BridgeBubble.transform.position;
+                FireFliesPos = ItemBubble.transform.position;
                 BridgeBubble.GetComponent<BubbleManager>().PopBubble();
+                BridgeAmount++;
                 if (PlayerPrefs.GetInt("Bridge", 0) == 0)
                 {
                     DisplayTextHolder.GetComponent<DisplayText>().SetText("BRIDGE", "drop into water to catch better fish");
@@ -94,6 +103,7 @@ public class BridgeManager : MonoBehaviour
         {
             //Item
             Tongue.transform.position = ItemBubble.transform.position;
+            FireFliesPos = CosmeticBubble.transform.position;
             ItemBubble.GetComponent<BubbleManager>().PopBubble();
             if (PlayerPrefs.GetInt("Item" + ItemINT.ToString(), 0) == 0)
             {
@@ -103,7 +113,7 @@ public class BridgeManager : MonoBehaviour
                 }
                 if (ItemINT == 1)
                 {
-                    DisplayTextHolder.GetComponent<DisplayText>().SetText("MOGI", "this mogul friend will make you rich \n teamwork makes more money");
+                    DisplayTextHolder.GetComponent<DisplayText>().SetText("MOGI", "teamwork will make you more money over time");
                 }
                 if (ItemINT == 2)
                 {
@@ -116,6 +126,7 @@ public class BridgeManager : MonoBehaviour
         {
             //Cosmetic
             Tongue.transform.position = CosmeticBubble.transform.position;
+            FireFliesPos = BridgeBubble.transform.position;
             CosmeticBubble.GetComponent<BubbleManager>().PopBubble();
             if (PlayerPrefs.GetInt("Cosmetic" + SkinINT.ToString(), 0) == 0)
             {

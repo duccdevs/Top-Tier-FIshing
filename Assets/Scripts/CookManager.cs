@@ -38,9 +38,6 @@ public class CookManager : MonoBehaviour
             numText.sprite = nums[FishAmount];
             if (FishAmount == 0)
             {
-                Fish1.GetComponent<Animator>().SetBool("Shiny", false);
-                Fish2.GetComponent<Animator>().SetBool("Shiny", false);
-                Fish2.GetComponent<Animator>().SetBool("Shiny", false);
                 FoodQuality = 0;
                 WhatFish1 = 0;
                 WhatFish2 = 0;
@@ -187,8 +184,5 @@ public class CookManager : MonoBehaviour
 
         FishAmount = 0;
         numText.sprite = nums[FishAmount];
-        Fish1.GetComponent<Animator>().SetBool("Shiny", false);
-        Fish2.GetComponent<Animator>().SetBool("Shiny", false);
-        Fish2.GetComponent<Animator>().SetBool("Shiny", false);
     }
 }

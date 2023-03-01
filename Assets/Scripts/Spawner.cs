@@ -132,9 +132,9 @@ public class Spawner : MonoBehaviour
     }
     public void CookBuff(float cookTime)
     {
-        timerthing = cookTime;
+        timerthing += cookTime;
         spawnRate = Random.Range(NewFish.x / 15, NewFish.y / 15);
-        MaxShit = cookTime;
+        MaxShit = timerthing;
         print(cookTime + " " + spawnRate);
         CookBuffBool = true;
         return;
