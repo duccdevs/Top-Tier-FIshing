@@ -20,7 +20,7 @@ public class Network : Photon.MonoBehaviour
         if (!connecting)
         {
             connecting = true;
-            PhotonNetwork.ConnectUsingSettings("alpha 0.3");
+            PhotonNetwork.ConnectUsingSettings(Application.version);
         }
         else if (!connected)
         {

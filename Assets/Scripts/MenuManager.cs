@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
@@ -8,11 +9,15 @@ public class MenuManager : MonoBehaviour
     public Animator anim;
     public AudioClip[] audios;
     public GameObject[] Screens;
+    public Text VolumeText;
+    public Text VersionText;
 
     void Start()
     {
         Application.targetFrameRate = 60;
         Screen.SetResolution(1280, 720, false);
+        VolumeText.text = (AudioListener.volume * 100).ToString("F0") + "%";
+        VersionText.text = "v." + Application.version;
     }
 
     public void StartGame()
@@ -48,6 +53,17 @@ public class MenuManager : MonoBehaviour
     public void SetReso2()
     {
         Screen.SetResolution(1280, 720, Screen.fullScreen);
+    }
+    public void SetFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+    public void ChangeVol(float Amount)
+    {
+        float vol = Mathf.Clamp(AudioListener.volume, 0.1F, 0.9F);
+        vol += Amount;
+        AudioListener.volume = vol;
+        VolumeText.text = (AudioListener.volume * 100).ToString("F0") + "%";
     }
 
     void StartedGame()

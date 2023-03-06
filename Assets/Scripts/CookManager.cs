@@ -176,6 +176,7 @@ public class CookManager : MonoBehaviour
         mealinst.GetComponent<MealManager>().WhatFish1 = WhatFish1;
         mealinst.GetComponent<MealManager>().WhatFish2 = WhatFish2;
         mealinst.GetComponent<MealManager>().WhatFish3 = WhatFish3;
+        mealinst.GetComponent<MealManager>().SetSprites();
 
         FoodQuality = 0;
         WhatFish1 = 0;

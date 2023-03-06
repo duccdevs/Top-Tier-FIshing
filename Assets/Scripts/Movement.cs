@@ -57,6 +57,7 @@ public class Movement : Photon.MonoBehaviour
     public int WhatFish1 = 0;
     public int WhatFish2 = 0;
     public int WhatFish3 = 0;
+    public int WhatChest = 0;
 
     [Header("Other")]
     private Image[] WeightImages;
@@ -75,11 +76,14 @@ public class Movement : Photon.MonoBehaviour
     public bool realFlower = false;
     public bool realMeal = false;
     public bool realBeef = false;
+    public bool realChest = false;
+    public GameObject ChestHolder;
     public bool HOLDINGMEAL = false;
     public float EatTime = 1.2F;
     public bool eaten = false;
     public bool CanFish = true;
     public bool CanFish2 = true;
+    public bool canKey = false;
 
     [Header("Audio")]
     private AudioSource audioSource;
@@ -87,6 +91,8 @@ public class Movement : Photon.MonoBehaviour
     public AudioClip GrabFish;
     public AudioClip GrabShiny;
     public AudioClip ItemOn;
+    public AudioClip WrongSound;
+    public AudioClip OpenSound;
 
     void Start()
     {
@@ -114,7 +120,7 @@ public class Movement : Photon.MonoBehaviour
     void CaughtFish()
     {
         //Logic
-        if (CanFish && foshHolder != null && !realSkin && !realBridge && !realBucket && !realFlower && !realMeal && !realBeef)
+        if (CanFish && foshHolder != null && !realSkin && !realBridge && !realBucket && !realFlower && !realMeal && !realBeef && !realChest)
         {
             CanFish = false;
             isSpecialFish = foshHolder.GetComponent<IAmFish>().SpecialFish;
@@ -145,15 +151,17 @@ public class Movement : Photon.MonoBehaviour
             CoinSprites = textInstance.GetComponent<TextManager>().CoinSpritess;
 
             //SetText
-            float fvalue = Mathf.Clamp((int)FoshWeight / 10, 1, Mathf.Infinity);
+            float fvalue = Mathf.Clamp((int)FoshWeight / 10, 0, 9);
             WeightImages[0].sprite = WeightSprites[(int) fvalue];
-            float fvalue2 = Mathf.Clamp((int)FoshWeight % 10, 1, Mathf.Infinity);
+            float fvalue2 = Mathf.Clamp((int)FoshWeight % 10, 0, 9);
             WeightImages[1].sprite = WeightSprites[(int)fvalue2];
-            float LastNumber = Mathf.Clamp((FoshWeight % 1) * 10, 1, Mathf.Infinity);
+            float LastNumber = Mathf.Clamp((FoshWeight % 1) * 10, 0, 9);
             WeightImages[2].sprite = WeightSprites[(int)LastNumber];
 
-            CoinImages[0].sprite = CoinSprites[(int)CoinAmount / 10];
-            CoinImages[1].sprite = CoinSprites[(int)CoinAmount % 10];
+            CoinAmount = CoinAmount * WeightMultiply;
+
+            CoinImages[0].sprite = CoinSprites[Mathf.Clamp((int)CoinAmount / 10, 0, 9)];
+            CoinImages[1].sprite = CoinSprites[Mathf.Clamp((int)CoinAmount % 10, 0, 9)];
 
             if (FoshWeight < 10)
             {
@@ -248,22 +256,22 @@ public class Movement : Photon.MonoBehaviour
         if (skinIDDD == 0)
         {
             //froghat
-            GoldMultiply += 0.25F;
+            GoldMultiply += 0.5F;
         }
         if (skinIDDD == 1)
         {
             //Crocs
-            WeightMultiply += 0.25F;
+            WeightMultiply += 0.5F;
         }
         if (skinIDDD == 2)
         {
             //Halo
-            SpawnerBuffMulti += 1.25F;
+            SpawnerBuffMulti += 0.5F;
         }
         if (skinIDDD == 3)
         {
             //Rainbow
-            ShinyDiv += 0.25F;
+            ShinyDiv += 0.5F;
         }
         //
         skinsId = skinIDDD;
@@ -295,17 +303,10 @@ public class Movement : Photon.MonoBehaviour
         {
             frogged = true;
         }
-    }
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if(collider.tag == "Cooking")
+        else
+        if(collider.tag == "Chest" && holdingFosh && !holdingItem && !isSpecialFish && eaten)
         {
-            canCook = false;
-            CookStation = null;
-        }
-        if(collider.tag == "Frog")
-        {
-            frogged = false;
+            canKey = true;
         }
     }
 
@@ -425,6 +426,15 @@ public class Movement : Photon.MonoBehaviour
                 BdigeMan.GetComponent<BridgeManager>().thisCol.enabled = true;
                 return;
             }
+            else
+            if (realChest)
+            {
+                //GrabChest
+                HoldItem(14);
+                WhatChest = ChestHolder.GetComponent<ChestManager>().rrNum;
+                BdigeMan.GetComponent<BridgeManager>().thisCol.enabled = true;
+                return;
+            }
 
             GM.GetComponent<GameManager>().CamShake(0.1F);
             GameObject grabInst = Instantiate(GrabTextObj, new Vector2(transform.position.x, Random.Range(-0.7F, -0.6F)), Quaternion.identity);
@@ -433,7 +443,7 @@ public class Movement : Photon.MonoBehaviour
             Destroy(grabInst, 0.85F);
             fishDelay += 0.2F;
 
-            if (InsideFish && !realBridge && !realBucket && !realSkin && !realFlower && !realMeal && !realBeef)
+            if (InsideFish && !realBridge && !realBucket && !realSkin && !realFlower && !realMeal && !realBeef && !realChest)
             {
                 //Caught Fish
                 CaughtFish();
@@ -549,7 +559,10 @@ public class Movement : Photon.MonoBehaviour
             {
                 if (!eaten)
                 {
-                    foshinst = Instantiate(AllFish[HoldingId], Hand.transform.GetChild(0).transform.position, Quaternion.identity);
+                    if (!canKey)
+                    {
+                        foshinst = Instantiate(AllFish[HoldingId], Hand.transform.GetChild(0).transform.position, Quaternion.identity);
+                    }
                     if (HoldingId == 11)
                     {
                         //Meal
@@ -557,17 +570,57 @@ public class Movement : Photon.MonoBehaviour
                         foshinst.GetComponent<MealManager>().WhatFish1 = WhatFish1;
                         foshinst.GetComponent<MealManager>().WhatFish2 = WhatFish2;
                         foshinst.GetComponent<MealManager>().WhatFish3 = WhatFish3;
+                        foshinst.GetComponent<MealManager>().SetSprites();
                         HOLDINGMEAL = false;
+                    }
+                    if (HoldingId == 14)
+                    {
+                        foshinst.GetComponent<ChestManager>().rrNum = WhatChest;
+                        foshinst.GetComponent<ChestManager>().SetNewFish();
                     }
                 }
                 else
                 {
-                    if (HoldingId != 11)
+                    if (HoldingId != 11 && !realChest)
                     {
                         foshinst = Instantiate(AllFishSkeleton[HoldingId], Hand.transform.GetChild(0).transform.position, Quaternion.identity);
                     }
+
+                    //OPENING CHEST
+                    if (canKey)
+                    {
+                        print("used Key on CHEST");
+                        if (HoldingId == WhatChest)
+                        {
+                            print("OPENED");
+                            Hand.transform.GetChild(0).GetComponent<WhatFosh>().ReleaseFish();
+                            Destroy(foshHolder);
+                            GM.GetComponent<GameManager>().CamShake(0.6F);
+                            audioSource.PlayOneShot(OpenSound);
+
+                            ChestHolder.GetComponent<ChestManager>().OpenChest();
+
+                            //WE ATE SUSHI YAY
+                            holdingFosh = false;
+                            holdingItem = false;
+                            HOLDINGMEAL = false;
+                            isSpecialFish = false;
+                            eaten = false;
+                            Hand.transform.GetChild(0).GetComponent<WhatFosh>().ReleaseFish();
+                            isSpecialFish = false;
+                            CanFish = true;
+                            Destroy(foshHolder);
+                            return;
+                        }
+                        else
+                        {
+                            print("WRONG KEY");
+                            GM.GetComponent<GameManager>().CamShake(0.2F);
+                            audioSource.PlayOneShot(WrongSound);
+                        }
+                    }
                 }
-                if (!holdingItem)
+                if (!holdingItem && !realChest)
                 {
                     foshinst.GetComponent<IAmFish>().Released();
                 }
@@ -589,6 +642,7 @@ public class Movement : Photon.MonoBehaviour
             realMeal = false;
             realSkin = false;
             realBeef = false;
+            realChest = false;
 
             CanFish = true;
 
@@ -637,6 +691,31 @@ public class Movement : Photon.MonoBehaviour
         transform.position = tmpPos;
 
         GetComponent<Rigidbody2D>().AddForce(Vector2.right * input * speed * Time.deltaTime, ForceMode2D.Impulse);
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if(collider.tag == "Cooking")
+        {
+            canCook = false;
+            CookStation = null;
+        }
+        if(collider.tag == "Frog")
+        {
+            frogged = false;
+        }
+        if(collider.tag == "Chest")
+        {
+            canKey = false;
+            Invoke("fuckcodingproperly", 0.01F);
+            //ChestHolder = null;
+            //realChest = false;
+        }
+    }
+    void fuckcodingproperly()
+    {
+        ChestHolder = null;
+        realChest = false;
     }
 
     void APPLYSTATS()

@@ -22,7 +22,7 @@ public class CoinManager : MonoBehaviour
 
     void Start()
     {
-        string thingString = currentCoins.ToString("00000000");
+        string thingString = Mathf.Clamp(currentCoins, 0, 99999999).ToString("00000000");
 
         chars = thingString.ToCharArray();
         a = int.Parse(chars[0].ToString());
@@ -47,16 +47,19 @@ public class CoinManager : MonoBehaviour
     public void AddCash(int CashAmount, float mult)
     {
         currentCoins += CashAmount * mult;
+        float addAmount = CashAmount * mult;
 
-        coinImagesADD[0].sprite = coinSprites[CashAmount / 10];
-        coinImagesADD[1].sprite = coinSprites[CashAmount % 10];
+        coinImagesADD[0].sprite = coinSprites[Mathf.Clamp((int)addAmount / 10, 0, 9)];
+        coinImagesADD[1].sprite = coinSprites[Mathf.Clamp((int)addAmount % 10, 0, 9)];
+
+        print(CashAmount * mult);
 
         GetComponent<Animator>().SetTrigger("Cash");
     }
 
     public void SetNewCount()
     {
-        string thingString = currentCoins.ToString("00000000");
+        string thingString = Mathf.Clamp(currentCoins, 0, 99999999).ToString("00000000");
 
         chars = thingString.ToCharArray();
         a = int.Parse(chars[0].ToString());

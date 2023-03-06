@@ -101,9 +101,9 @@ public class Spawner : MonoBehaviour
             {
                 //ShinyBuff
                 isShiny = true;
-                timerthing = 8.0F;
+                timerthing = 8.0F * GM.GetComponent<GameManager>().CootsGameObject.GetComponent<Movement>().SpawnerBuffMulti;
                 spawnRate = Random.Range(NewFish.x / 10, NewFish.y / 10);
-                MaxShit = 8.0F;
+                MaxShit = timerthing;
                 return;
             }
             
@@ -113,7 +113,7 @@ public class Spawner : MonoBehaviour
                 {
                     //ShinyBuff
                     isShiny = true;
-                    timerthing += 0.75F;
+                    timerthing += 0.75F * GM.GetComponent<GameManager>().CootsGameObject.GetComponent<Movement>().SpawnerBuffMulti;
                     spawnRate = Random.Range(NewFish.x / 10, NewFish.y / 10);
                     MaxShit = timerthing;
                     return;
@@ -122,9 +122,9 @@ public class Spawner : MonoBehaviour
                 {
                     //NormalBuff
                     isShiny = false;
-                    timerthing = 5.0F;
+                    timerthing = 5.0F * GM.GetComponent<GameManager>().CootsGameObject.GetComponent<Movement>().SpawnerBuffMulti;
                     spawnRate = Random.Range(NewFish.x / 5, NewFish.y / 5);
-                    MaxShit = 5.0F;
+                    MaxShit = timerthing;
                     return;
                 }
             }
@@ -132,7 +132,7 @@ public class Spawner : MonoBehaviour
     }
     public void CookBuff(float cookTime)
     {
-        timerthing += cookTime;
+        timerthing += cookTime * GM.GetComponent<GameManager>().CootsGameObject.GetComponent<Movement>().SpawnerBuffMulti;
         spawnRate = Random.Range(NewFish.x / 15, NewFish.y / 15);
         MaxShit = timerthing;
         print(cookTime + " " + spawnRate);

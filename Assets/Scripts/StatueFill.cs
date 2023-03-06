@@ -17,6 +17,7 @@ public class StatueFill : MonoBehaviour
     public ParticleSystem[] Effects;
     public ParticleSystem[] Confetti;
     public AudioClip Victory;
+    public Animator WinScreen;
 
     float fullsize = 1.0F;
     float FullStatue;
@@ -121,12 +122,12 @@ public class StatueFill : MonoBehaviour
         GameObject.Find("GameManager").GetComponent<GameManager>().CamShake(0.5F);
         Coots.GetComponent<Movement>().enabled = false;
 
-        Invoke("GoBackHome", 5);
+        Invoke("GoBackHome", 4);
     }
 
     void GoBackHome()
     {
-        SceneManager.LoadScene(0);
+        WinScreen.SetBool("Win", true);
     }
 
     public void SetNewCount()

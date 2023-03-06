@@ -119,6 +119,10 @@ public class BridgeManager : MonoBehaviour
                 {
                     DisplayTextHolder.GetComponent<DisplayText>().SetText("MEAT BAIT", "throw into water to catch even bigger fish (can't cook)");
                 }
+                if (ItemINT == 3)
+                {
+                    DisplayTextHolder.GetComponent<DisplayText>().SetText("TREASURE CHEST", "fit the right skeleton key to open for loot");
+                }
                 PlayerPrefs.SetInt("Item" + ItemINT.ToString(), 1);
             }
         }
@@ -126,7 +130,14 @@ public class BridgeManager : MonoBehaviour
         {
             //Cosmetic
             Tongue.transform.position = CosmeticBubble.transform.position;
-            FireFliesPos = BridgeBubble.transform.position;
+            if (BridgeAmount < 8)
+            {
+                FireFliesPos = BridgeBubble.transform.position;
+            }
+            else
+            {
+                FireFliesPos = ItemBubble.transform.position;
+            }
             CosmeticBubble.GetComponent<BubbleManager>().PopBubble();
             if (PlayerPrefs.GetInt("Cosmetic" + SkinINT.ToString(), 0) == 0)
             {
@@ -144,7 +155,7 @@ public class BridgeManager : MonoBehaviour
                 }
                 if (SkinINT == 3)
                 {
-                    DisplayTextHolder.GetComponent<DisplayText>().SetText("RAINBOW", "higher chance of finding shiny fish (stackable)");
+                    DisplayTextHolder.GetComponent<DisplayText>().SetText("RAINBOW", " higher chance of finding shiny fish (stackable)");
                 }
                 PlayerPrefs.SetInt("Cosmetic" + SkinINT, 1);
             }
@@ -202,6 +213,11 @@ public class BridgeManager : MonoBehaviour
             GameObject objInst = Instantiate(ItemObj[ItemINT], transform.position, Quaternion.identity);
             objInst.GetComponent<Rigidbody2D>().AddForce(Vector2.up * Random.Range(1.75F, 2.5F), ForceMode2D.Impulse);
             objInst.GetComponent<Rigidbody2D>().AddForce(Vector2.right * Random.Range(2.75F, 3.5F), ForceMode2D.Impulse);
+            if (ItemINT == 3)
+            {
+                print("chest dropped");
+                objInst.GetComponent<ChestManager>().SetFirst();
+            }
         }
         if (rr == 3)
         {

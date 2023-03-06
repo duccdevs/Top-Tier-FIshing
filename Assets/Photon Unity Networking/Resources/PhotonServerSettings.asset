@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppID: f28b2a80-654c-4965-94fa-64ba7742da4d
   VoiceAppID: 
-  ChatAppID: 
+  ChatAppID: f28b2a80-654c-4965-94fa-64ba7742da4d
   HostType: 1
   PreferredRegion: 0
   EnabledRegions: -1
@@ -43,6 +43,5 @@ MonoBehaviour:
   - RequestForPickupTimes
   - SetFish2
   - SetFishSkel2
-  - SetHat
   - TaggedPlayer
   DisableAutoOpenWizard: 1

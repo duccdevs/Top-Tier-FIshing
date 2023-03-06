@@ -22,7 +22,7 @@ public class FrogCoinMan : MonoBehaviour
     void Start()
     {
         GM = GameObject.Find("Coot");
-        currentCoins = (4 * Mathf.Pow(1.15F, BoughtAmount)) - 0.5F;
+        currentCoins = Mathf.Clamp((4 * Mathf.Pow(1.15F, BoughtAmount)) - 0.5F, 0, 99999);
         string thingString = currentCoins.ToString("00000");
 
         chars = thingString.ToCharArray();
@@ -46,7 +46,7 @@ public class FrogCoinMan : MonoBehaviour
             GM = GameObject.Find("Coot");
         }
         BoughtAmount++;
-        currentCoins = (4 * Mathf.Pow(1.15F, BoughtAmount)) - 0.5F;
+        currentCoins = Mathf.Clamp((4 * Mathf.Pow(1.15F, BoughtAmount)) - 0.5F, 0, 99999);
 
         string thingString = currentCoins.ToString("00000");
 

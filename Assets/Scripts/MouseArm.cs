@@ -75,6 +75,18 @@ public class MouseArm : Photon.MonoBehaviour
                 transform.parent.GetComponent<Movement>().foshHolder = collider.gameObject;
                 transform.parent.GetComponent<Movement>().realBeef = true;
             }
+            if (collider.tag == "Chest")
+            {
+                transform.parent.GetComponent<Movement>().foshHolder = collider.gameObject;
+                transform.parent.GetComponent<Movement>().ChestHolder = collider.gameObject;
+                transform.parent.GetComponent<Movement>().realChest = true;
+            }
+        }
+
+        if (collider.tag == "Chest" && transform.parent.GetComponent<Movement>().holdingFosh)
+        {
+            transform.parent.GetComponent<Movement>().realChest = true;
+            transform.parent.GetComponent<Movement>().ChestHolder = collider.gameObject;
         }
     }
 
@@ -129,6 +141,13 @@ public class MouseArm : Photon.MonoBehaviour
                 transform.parent.GetComponent<Movement>().realBeef = false;
                 transform.parent.GetComponent<Movement>().foshHolder = null;
                 transform.parent.GetComponent<Movement>().InsideFish = false;
+            }
+            else
+            if (collider.tag == "Chest" && transform.parent.GetComponent<Movement>().foshHolder.gameObject.tag == "Chest")
+            {
+                transform.parent.GetComponent<Movement>().realChest = false;
+                transform.parent.GetComponent<Movement>().foshHolder = null;
+                //transform.parent.GetComponent<Movement>().ChestHolder = null;
             }
         }
     }

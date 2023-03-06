@@ -35,7 +35,7 @@ public class BubbleManager : MonoBehaviour
         if (BubbleID == 2)
         {
             RandomItem++;
-            if (RandomItem == 3)
+            if (RandomItem == 4)
             {
                 RandomItem = 0;
             }

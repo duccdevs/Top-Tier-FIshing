@@ -18,6 +18,7 @@ TagManager:
   - Hand
   - Spawner
   - Beef
+  - Chest
   layers:
   - Default
   - TransparentFX
